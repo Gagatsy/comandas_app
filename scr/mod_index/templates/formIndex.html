@@ -2,10 +2,23 @@
     <html lang="pt-br">
         <head>
             <meta charset="UTF-8">
-            <title>Index</title>
+            <title>HOME</title>
         </head>
         <body>
-            <h1>Rota da página de Index da nossa WEB APP</h1>
-            <h1>Uso de render_template</h1>
+            {% extends "base.html" %}
+
+            {% block title %}Funcionário{% endblock %}
+
+            {% block content %}
+
+            <h1>HOME</h1>
+            <p class="important">Seja bem vindo!</p>
+                <ul>
+                    <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
+                    <li><a href="{{ url_for('funcionario.formListaFuncionario') }}">Funcionário</a></li>
+                    <li><a href="{{ url_for('cliente.formListaCliente') }}">Cliente</a></li>
+                    <li><a href="{{ url_for('produto.formListaProduto') }}">Produto</a></li>
+                </ul>
+            {% endblock %}
         </body>
     </html>
