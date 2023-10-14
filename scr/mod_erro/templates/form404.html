@@ -2,31 +2,46 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>404</title>
+    <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <title>404 - Página não encontrada</title>
+    {% block style %}
+        <!-- Inclua os links para os estilos CSS do Bootstrap aqui -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
+        <!-- Adicione estilos personalizados, se necessário -->
+        <style>
+            .error-message {
+                font-size: 18px;
+                color: #FF0000;
+            }
+            /* Adicione outros estilos personalizados conforme necessário */
+        </style>
+    {% endblock %}
 </head>
 <body>
     {% extends "base.html" %}
-
     {% block title %}Page Not Found{% endblock %}
-
     {% block content %}
-    <div class="row">
-        <div class="col">
-            <h1>Página não encontrada!</h1>
-            <h3>Favor verificar se o endereço digitado esta correto.</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center mt-5">
+                <h1 class="display-4">Página não encontrada!</h1>
+                <h3 class="lead">Favor verificar se o endereço digitado está correto.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center mt-4">
+                <figure>
+                    <img src="{{ url_for('static', filename='Erro404.jpg') }}" alt="Erro 404" class="img-fluid">
+                </figure>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center mt-4">
+                {# Mostra a mensagem de erro retornada #}
+                <p class="error-message">{{ erroHttp }}</p>
+            </div>
         </div>
     </div>
-
-    <figure>
-        <img src="{{ url_for('static', filename='Erro404.jpg') }}" alt="Erro 404">
-    </figure>
-
-    <div class="row">
-        <div class="col">
-            {# mostra a mensagem de erro retornada #}
-            <p>{{ erroHttp }}</p>
-        </div>
-    </div>
-    {% endblock %}   
+    {% endblock %}
 </body>
 </html>

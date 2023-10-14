@@ -1,21 +1,58 @@
 <!DOCTYPE html>
-    <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <title>Cliente</title>
-        </head>
-        <body>
-            {% extends "base.html" %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <title>Clientes</title>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    {% extends "base.html" %}
 
-            {% block title %}Funcionário{% endblock %}
+    {% block title %}Clientes{% endblock %}
 
-            {% block content %}
+    {% block content %}
+    <div class="container">
+        <h1>Clientes</h1>
+        <form action="{{ url_for('cliente.formCliente') }}" method="POST">
+            <button type="submit" class="btn btn-primary" name="formNovo"><i class="fas fa-plus"></i> Novo Cliente</button>
+        </form>
 
-            <h1>Clientes</h1>
-            <p class="important">Seja bem vindo!</p>
-                <ul>
-                    <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
-                </ul>
-            {% endblock %}
-        </body>
-    </html>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Observação</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Nome do Cliente</td>
+                    <td>Rua Seila Oque</td>
+                    <td>888888-00</td>
+                    <td>(12) 3786-7330</td>
+                    <td>Lages</td>
+                    <td>Conta Tudo</td>
+                    <td>dgyasd@heuw.com</td>
+                    <td>Teste</td>
+                    <td>
+                        <a href="#"><i class="fas fa-edit"></i> Editar</a>
+                        <a href="#"><i class="fas fa-trash"></i> Excluir</a>
+                    </td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -2,41 +2,46 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %} - AbcBolinhas</title>
-    
+    <title>{% block title %}{% endblock %} - Alexsander</title>
+
     {% block style %}{% endblock %}
-    <style>
-        .important {
-        color: #6495ED;
-        }
-    </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
-    {% block menu %}
-        <ul>
-            <li><a href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i> HOME</a></li>
-            <li><a href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down"></i> FUNCIONÁRIOS</a></li>
-            <li><a href="{{ url_for('cliente.formListaCliente') }}"><i class="fas fa-users"></i> CLIENTES</a></li>
-            <li><a href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice"></i> PRODUTOS</a></li>
-        </ul>
-    {% endblock %}
-
-        <div class="container-fluid mt-3">
-            {% block content %}{% endblock %}
-            <br><br><br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i> Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down"></i> Funcionários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cliente.formListaCliente') }}"><i class="fas fa-users"></i> Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice"></i> Produtos</a>
+                </li>
+            </ul>
         </div>
+    </nav>
 
-    {% block footer %}
-        <a href="{{ url_for('index.formIndex') }}">&copy; 2023 by AbcBolinhas</a>
-    {% endblock %}
+    <div class="container mt-3">
+        {% block content %}{% endblock %}
+        <br><br><br>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 by Alexsander</p>
+        </div>
+    </footer>
 
     {% block js %}{% endblock %}
-        <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

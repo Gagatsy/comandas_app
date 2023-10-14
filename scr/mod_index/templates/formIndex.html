@@ -2,6 +2,8 @@
     <html lang="pt-br">
         <head>
             <meta charset="UTF-8">
+            <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
             <title>HOME</title>
         </head>
         <body>
@@ -10,15 +12,10 @@
             {% block title %}Funcionário{% endblock %}
 
             {% block content %}
-
-            <h1>HOME</h1>
-            <p class="important">Seja bem vindo!</p>
-                <ul>
-                    <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
-                    <li><a href="{{ url_for('funcionario.formListaFuncionario') }}">Funcionário</a></li>
-                    <li><a href="{{ url_for('cliente.formListaCliente') }}">Cliente</a></li>
-                    <li><a href="{{ url_for('produto.formListaProduto') }}">Produto</a></li>
-                </ul>
+            <div class="container">
+                <h1>HOME</h1>
+                <p class="alert alert-info">Seja Bem Vindo!</p>
+            </div>
             {% endblock %}
         </body>
     </html>

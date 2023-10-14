@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Clientes</title>
+    {% block style %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
+        <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.rawgit.com/RobinHerbots/Inputmask/5.0.6/dist/jquery.inputmask.min.js"></script>
+        <style>
+            /* Estilos personalizados */
+            .focus-highlight:focus {
+                border-color: #007BFF;
+                box-shadow: 0 0 8px #007BFF;
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                // Adicionar máscaras aos campos
+                $('#cep').inputmask("99999-999");
+                $('#telefone').inputmask("(99) 99999-9999");
+
+                $('#formCadastroCliente').on('submit', function(event) {
+                    var nome = $('#nome').val();
+                    var cep = $('#cep').val();
+                    var telefone = $('#telefone').val();
+                    var email = $('#email').val();
+
+                    // Verificar campos obrigatórios
+                    if (!nome || !cep || !telefone || !email) {
+                        alert('Preencha todos os campos obrigatórios.');
+                        event.preventDefault(); // Impede o envio do formulário
+                    }
+                });
+            });
+        </script>
+    {% endblock %}
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block title %}Cadastro de Cliente{% endblock %}
+    {% block content %}
+    <div class="container">
+        <form name="formCadastroCliente" id="formCadastroCliente" action="" method="POST">
+            <h1>Cadastro de Cliente</h1>
+
+            <div class="form-group">
+                <label for="nome">Nome do Cliente</label>
+                <input type="text" class="form-control focus-highlight" name="nome" id="nome" value="" placeholder="Nome do Cliente" maxlength="100" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input type="text" class="form-control focus-highlight" name="endereco" id="endereco" value="" placeholder="Endereço" maxlength="150" required>
+            </div>
+
+            <div class="form-group">
+                <label for="observacao">Observação</label>
+                <textarea class="form-control focus-highlight" name="observacao" id="observacao" placeholder="Observação" rows="4" maxlength="200"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="text" class="form-control focus-highlight" name="cep" id="cep" value="" placeholder="CEP" maxlength="8" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control focus-highlight" name="bairro" id="bairro" value="" placeholder="Bairro" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control focus-highlight" name="cidade" id="cidade" value="" placeholder="Cidade" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="form-control focus-highlight" name="telefone" id="telefone" value="" placeholder="Telefone" maxlength="11" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control focus-highlight" name="email" id="email" value="" placeholder="E-mail" maxlength="100" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="salvarCliente"><i class="fas fa-save"></i> Salvar</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>

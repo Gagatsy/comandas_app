@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto - AbcBolinhas</title>
+    {% block style %}
+        <!-- Inclua os links para os estilos CSS do Bootstrap e Font Awesome aqui -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
+        <style>
+            /* Estilos personalizados, se necessário */
+        </style>
+    {% endblock %}
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block title %}Cadastro de Produto{% endblock %}
+    {% block content %}
+    <div class="container">
+        <form name="formCadastroProduto" id="formCadastroProduto" action="" method="POST">
+            <h1>Cadastro de Produto</h1>
+
+            <div class="form-group">
+                <label for="nome">Nome do Produto</label>
+                <input type="text" class="form-control focus-highlight" name="nome" id="nome" value="" placeholder="Nome do Produto" maxlength="50" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">Descrição do Produto</label>
+                <textarea class="form-control focus-highlight" name="descricao" id="descricao" placeholder="Descrição do Produto" rows="4" maxlength="100" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="text" class="form-control focus-highlight" name="quantidade" id="quantidade" value="" placeholder="Quantidade" maxlength="10" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="salvarProduto"><i class="fas fa-save"></i> Salvar</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
