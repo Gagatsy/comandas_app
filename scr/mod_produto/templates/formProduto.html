@@ -16,9 +16,17 @@
     {% extends "base.html" %}
     {% block title %}Cadastro de Produto{% endblock %}
     {% block content %}
+
+    {{ result }}
+
     <div class="container">
-        <form name="formCadastroProduto" id="formCadastroProduto" action="" method="POST">
+        <form name="formCadastroProduto" id="formCadastroProduto" action="{{ url_for('produto.insert')}}" method="POST" enctype="multipart/form-data">
             <h1>Cadastro de Produto</h1>
+
+            <div class="form-group">
+                <label for="id">Código</label>
+                <input type="text" name="id" id="id" value="0" placeholder="Código" readonly>
+            </div>
 
             <div class="form-group">
                 <label for="nome">Nome do Produto</label>
@@ -31,9 +39,15 @@
             </div>
 
             <div class="form-group">
-                <label for="quantidade">Quantidade</label>
-                <input type="text" class="form-control focus-highlight" name="quantidade" id="quantidade" value="" placeholder="Quantidade" maxlength="10" required>
+                <label for="quantidade">Valor Unitario</label>
+                <input type="text" class="form-control focus-highlight" name="valor_unitario" id="valor_unitario" value="" placeholder="Valor Unitario" maxlength="10" required>
             </div>
+
+            <div class="form-group">
+                <label for="foto">Foto</label></br>
+                <input type="file" class="form-control-file" name="foto" id="foto" accept="image/*">
+            </div>
+
 
             <button type="submit" class="btn btn-primary" name="salvarProduto"><i class="fas fa-save"></i> Salvar</button>
         </form>

@@ -5,9 +5,12 @@
     <link rel="icon" href="static/favicon.ico" type="image/x-icon">
     <title>Funcionários</title>
     {% block style %}{% endblock %}
+    
 </head>
 <body>
     {% extends "base.html" %}
+
+    {{ result }}
 
     {% block title %}Funcionário{% endblock %}
 
@@ -32,20 +35,21 @@
                 </tr>
             </thead>
             <tbody>
+                {% if result %}
+                {% for row in result %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Nome do Funcionário</td>
-                    <td>12345</td>
-                    <td>123.456.789-00</td>
-                    <td>(12) 3456-7890</td>
-                    <td>Grupo A</td>
-                    <td>********</td>
-                    <td>
-                        <a href="#"><i class="fas fa-edit"></i> Editar</a>
-                        <a href="#"><i class="fas fa-trash"></i> Excluir</a>
-                    </td>
+                    <th scope="row"> {{ row['id_funcionario'] }}</th>
+                    <td> {{ row['nome'] }}</td>
+                    <td> {{ row['matricula'] }}</td>
+                    <td> {{ row['cpf'] }}</td>
+                    <td> {{ row['telefone'] }}</td>
+                    <td> {{ row['grupo'] }}</td>
+                    <td> {{ row['senha'] }}</td>
+                    <td><a href="#"><i class="fas fa-edit"></i></td></a>
+                    <td><a href="#"><i class="fas fa-trash"></i></td></a>
                 </tr>
-                <!-- Adicione mais linhas conforme necessário -->
+                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>

@@ -19,8 +19,8 @@
         <script>
             $(document).ready(function() {
                 // Adicionar máscaras aos campos
-                $('#cep').inputmask("99999-999");
-                $('#telefone').inputmask("(99) 99999-9999");
+                //$('#cep').inputmask("99999-999");
+                //$('#telefone').inputmask("(99) 99999-9999");
 
                 $('#formCadastroCliente').on('submit', function(event) {
                     var nome = $('#nome').val();
@@ -29,7 +29,7 @@
                     var email = $('#email').val();
 
                     // Verificar campos obrigatórios
-                    if (!nome || !cep || !telefone || !email) {
+                    if (!nome || !telefone) {
                         alert('Preencha todos os campos obrigatórios.');
                         event.preventDefault(); // Impede o envio do formulário
                     }
@@ -42,9 +42,17 @@
     {% extends "base.html" %}
     {% block title %}Cadastro de Cliente{% endblock %}
     {% block content %}
+
+    {{ result }}
+
     <div class="container">
-        <form name="formCadastroCliente" id="formCadastroCliente" action="" method="POST">
+        <form name="formCadastroCliente" id="formCadastroCliente" action="{{ url_for('cliente.insert')}}" method="POST">
             <h1>Cadastro de Cliente</h1>
+
+            <div class="form-group">
+                <label for="id">Código</label>
+                <input type="text" name="id" id="id" value="0" placeholder="Código" readonly>
+            </div>
 
             <div class="form-group">
                 <label for="nome">Nome do Cliente</label>
@@ -52,6 +60,11 @@
             </div>
 
             <div class="form-group">
+                <label for="nome">CPF</label>
+                <input type="text" class="form-control focus-highlight" name="cpf" id="cpf" value="" placeholder="CPF" maxlength="15" autofocus required>
+            </div>
+
+            <!--<div class="form-group">
                 <label for="endereco">Endereço</label>
                 <input type="text" class="form-control focus-highlight" name="endereco" id="endereco" value="" placeholder="Endereço" maxlength="150" required>
             </div>
@@ -74,16 +87,36 @@
             <div class="form-group">
                 <label for="cidade">Cidade</label>
                 <input type="text" class="form-control focus-highlight" name="cidade" id="cidade" value="" placeholder="Cidade" maxlength="50" required>
-            </div>
+            </div>-->
 
             <div class="form-group">
                 <label for="telefone">Telefone</label>
                 <input type="tel" class="form-control focus-highlight" name="telefone" id="telefone" value="" placeholder="Telefone" maxlength="11" required>
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" class="form-control focus-highlight" name="email" id="email" value="" placeholder="E-mail" maxlength="100" required>
+            </div>-->
+
+            <div class="form-group">
+                <label for="nome">Compra Fiado</label>
+                <input type="text" class="form-control focus-highlight" name="compra_fiado" id="compra_fiado" value="" placeholder="Compra Fiado" maxlength="15" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Dia Fiado</label>
+                <input type="text" class="form-control focus-highlight" name="dia_fiado" id="dia_fiado" value="" placeholder="Dia Fiado" maxlength="15" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" name="senha" id="senha" value="Bolinhas" placeholder="Senha" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resenha">Confirme a Senha</label>
+                <input type="password" class="form-control" name="resenha" id="resenha" value="Bolinhas" placeholder="Confirme a Senha" required>
             </div>
 
             <button type="submit" class="btn btn-primary" name="salvarCliente"><i class="fas fa-save"></i> Salvar</button>
