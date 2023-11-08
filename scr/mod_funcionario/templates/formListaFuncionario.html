@@ -5,11 +5,9 @@
     <link rel="icon" href="static/favicon.ico" type="image/x-icon">
     <title>Funcionários</title>
     {% block style %}{% endblock %}
-    
 </head>
 <body>
     {% extends "base.html" %}
-
     {{ result }}
 
     {% block title %}Funcionário{% endblock %}
@@ -38,21 +36,76 @@
                 {% if result %}
                 {% for row in result %}
                 <tr>
-                    <th scope="row"> {{ row['id_funcionario'] }}</th>
-                    <td> {{ row['nome'] }}</td>
-                    <td> {{ row['matricula'] }}</td>
-                    <td> {{ row['cpf'] }}</td>
-                    <td> {{ row['telefone'] }}</td>
-                    <td> {{ row['grupo'] }}</td>
-                    <td> {{ row['senha'] }}</td>
-                    <td><a href="#"><i class="fas fa-edit"></i></td></a>
-                    <td><a href="#"><i class="fas fa-trash"></i></td></a>
+                    <th scope="row">{{ row['id_funcionario'] }}</th>
+                    <td>{{ row['nome'] }}</td>
+                    <td>{{ row['matricula'] }}</td>
+                    <td>{{ row['cpf'] }}</td>
+                    <td>{{ row['telefone'] }}</td>
+                    <td>{{ row['grupo'] }}</td>
+                    <td>{{ row['senha'] }}</td>
+                    <td>
+                        <form action="{{ url_for('funcionario.formEditFuncionario') }}" method="POST" name="formEdit{{ row['id_funcionario'] }}">
+                            <input type="hidden" name="id" value="{{ row['id_funcionario'] }}">
+                            <button type="submit" name="formEditFuncionario"><i class="fas fa-edit"></i> Editar</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method='POST' name='jsDelete' id='jsDelete'>
+                            <input type='hidden' name='id_funcionario' value="{{ row['id_funcionario'] }}">
+                            <button type='submit' name='formDeleteFuncionario' class='btn'><i class='fas fa-trash'></i></button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
                 {% endif %}
             </tbody>
-        </table>
+        </table>    
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block js %}
+    <script>
+        $("form[name='jsDelete']").submit(function (e) {
+            // parar o envio para poder fazer manualmente
+            e.preventDefault();
+            Swal.fire({
+            title: '', text: "Deseja realmente excluir: " + $(e.target)[0][0].value,
+            icon: 'warning', showCancelButton: true,
+            confirmButtonColor: '#3085d6', cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar', confirmButtonText: 'Sim'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                deletarFuncionario($(e.target)[0][0].value); // Retorna o valor que está no id
+            }
+            })
+        })
+        // sempre pega a url da barra de endereço
+        $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+        function deletarFuncionario(idFuncionario) {
+            $.post($SCRIPT_ROOT + "{{ url_for('funcionario.delete') }}", {
+            id_funcionario: idFuncionario
+            }, function (data) {
+            if (!data.erro) {
+                Swal.fire({
+                title: '', text: 'ID' + data.msg.id + ', ' + data.msg.msg,
+                icon: 'success', showCancelButton: false,
+                confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'OK'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace($SCRIPT_ROOT + "{{ url_for('funcionario.formListaFuncionario') }}");
+                }
+                })
+            }
+            else {
+                Swal.fire(data.msgErro.msg, data.msgErro.erro, "error");
+            }
+            }
+            )
+        }
+    </script>
     {% endblock %}
+    {% endblock %}
+ 
 </body>
 </html>

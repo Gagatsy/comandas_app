@@ -7,9 +7,8 @@
     {% block style %}{% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='sweetalert2/sweetalert2.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
@@ -47,10 +46,13 @@
 
     <!-- monitorar log do navegador, pois a ordem interfere -->
     <script src="{{ url_for('static', filename='jquery-3.7.1.js') }}"></script>
-    <script src="{{ url_for('static', filename='jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.maskedinput-master/dist/jquery.maskedinput.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
 
     <!-- redirect - request.args.get('msg' ou 'msgErro') -->
     {% if request.args.get('msg'): %}
