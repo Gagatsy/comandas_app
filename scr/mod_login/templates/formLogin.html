@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block menu %}
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><h2>Abc Bolinhas</h2></a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Faça Login</h3>
+                    <form action="{{ url_for('login.validaLogin') }}" method="post">
+                        <div class="form-group">
+                            <label for="cpf">CPF</label>
+                            <input class="form-control" id="cpf" name="cpf" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input class="form-control" id="senha" name="senha" type="password" required>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-dark" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
